@@ -1,148 +1,50 @@
 #!/usr/bin/python3
-"""
-A module with a Rectangle that does nothing
-"""
+"""define a Rectangle"""
 
 
 class Rectangle:
-    """
-    An empty Rectangle class
-    """
+    """Rectangle class"""
 
     def __init__(self, width=0, height=0):
-        """
-        Checks the parameters and initializes some values
-        Args:
-            width (:obj:`int`, optional): The width of the Rectangle.
-            height (:obj:`int`, optional): The height of the Rectangle.
-        """
-
+        """init for Rectangle"""
         self.width = width
         self.height = height
 
     @property
     def width(self):
-        """
-        Returns the width of the Rectangle
-        """
-
+        """Rectangle width getter"""
         return self.__width
 
     @width.setter
     def width(self, value):
-        """
-        Checks the parameters and set the size of the Rectangle
-        Args:
-            value (int): The width of the Rectangle.
-        Raises:
-            TypeError: If `value` type is not `int`.
-            ValueError: If `value` is less than `0`.
-        """
-
-        self.__check_valid_width(value)
+        """Rectangle width setter"""
+        if type(value) != int:
+            raise TypeError("width must be an integer")
+        if value < 0:
+            raise ValueError("width must be >= 0")
         self.__width = value
 
     @property
     def height(self):
-        """
-        Returns the width of the Rectangle
-        """
-
+        """Rectangle height getter"""
         return self.__height
 
     @height.setter
     def height(self, value):
-        """
-        Checks the parameters and set the size of the Rectangle
-        Args:
-            value (int): The height of the Rectangle.
-        Raises:
-            TypeError: If `value` type is not `int`.
-            ValueError: If `value` is less than `0`.
-        """
-
-        self.__check_valid_height(value)
+        """Rectangle height setter"""
+        if type(value) != int:
+            raise TypeError("height must be an integer")
+        if value < 0:
+            raise ValueError("height must be >= 0")
         self.__height = value
 
-    def __check_valid_width(self, width):
-        """
-        Checks if the width is a valid integer
-        Args:
-            width (int): The width of the Rectangle.
-        Raises:
-            TypeError: If `width` type is not `int`.
-            ValueError: If `width` is less than `0`.
-        """
-
-        if self.__check_int_value(width) is False:
-            raise TypeError('width must be an integer')
-
-        if self.__check_positive_value(width) is False:
-            raise ValueError('width must be >= 0')
-
-    def __check_valid_height(self, height):
-        """
-        Checks if the height is a valid integer
-        Args:
-            height (int): The height of the Rectangle.
-        Raises:
-            TypeError: If `height` type is not `int`.
-            ValueError: If `height` is less than `0`.
-        """
-
-        if self.__check_int_value(height) is False:
-            raise TypeError('height must be an integer')
-
-        if self.__check_positive_value(height) is False:
-            raise ValueError('height must be >= 0')
-
-    def __check_int_value(self, value):
-        """
-        Checks if the value is an integer
-        Args:
-            value (int): The number to verify
-        Returns:
-            int: If is a int `True`, `False` otherwise.
-        """
-
-        if type(value) is int:
-            return True
-
-        return False
-
-    def __check_positive_value(self, value):
-        """
-        Checks if the value is a positive integer
-        Args:
-            value (int): The number to verify
-        Returns:
-            int: `True` If value is greater than
-            or equal to 0, `False` otherwise.
-        """
-
-        if value >= 0:
-            return True
-
-        return False
-
     def area(self):
-        """
-        Computes the area of a Rectangle.
-        Returns:
-            int: The area of a Rectangle.
-        """
-
-        return self.__width * self.__height
+        """Rectangle area getter"""
+        return self.__height * self.__width
 
     def perimeter(self):
-        """
-        Computes the perimeter of a Rectangle.
-        Returns:
-            int: The perimeter of a Rectangle.
-        """
-
-        if self.__width == 0 or self.__height == 0:
-            return 0
-
-        return self.__width * 2 + self.__height * 2
-
+        """returns the perimeter of the Rectangle,
+        or nothing if height/width are 0"""
+        if self.__height == 0 or self.__width == 0:
+            return
+        return (self.__height * 2) + (self.__width * 2)
