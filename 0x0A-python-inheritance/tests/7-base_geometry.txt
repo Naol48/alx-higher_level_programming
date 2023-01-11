@@ -1,0 +1,150 @@
+==========================
+  How to use 7-base_geometry.py  
+==========================
+
+``7-base_geometry`` class BaseGeometry
+
+File ``7-base_geometry``
+
+Importing the function from the module:
+
+	>>> BaseGeometry = __import__("7-base_geometry").BaseGeometry
+
+Checks to realise:
+
+	>>> modulo_doc = __import__("7-base_geometry").__doc__
+	>>> print(len(modulo_doc) > 0)
+	True
+
+	>>> class_doc = __import__("7-base_geometry").BaseGeometry.__doc__
+	>>> print(len(class_doc) > 0)
+	True
+
+	>>> area_doc = __import__("7-base_geometry").BaseGeometry.area.__doc__
+        >>> len(area_doc) > 1
+        True
+
+        >>> function_doc = __import__("7-base_geometry").BaseGeometry.integer_validator.__doc__
+        >>> len(function_doc) > 1
+        True
+
+Tester of Method Area
+=====================
+``Area`` will raise an exception because it not implemented
+
+	>>> bg = BaseGeometry()
+
+	>>> try:
+    	...	print(bg.area())
+	... except Exception as e:
+	...	print("[{}] {}".format(e.__class__.__name__, e))
+	...
+	[Exception] area() is not implemented
+
+Tester of Method Integer Validator
+==================================
+
+``Integer_validator`` checks if type(value) is an integer, otherwhise will raise an error
+
+Tester with integer cases:
+
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator("my_int", 12)
+	>>>
+
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator("width", 89)
+	>>>
+
+Tester with string:
+
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator("name", "John")
+        Traceback (most recent call last):
+	TypeError: name must be an integer
+
+Tester with zero value:
+
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator("age", 0)
+	Traceback (most recent call last):
+    	ValueError: age must be greater than 0
+
+Tester with negative number
+
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator("distance", -4)
+	Traceback (most recent call last):
+    	ValueError: distance must be greater than 0
+
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator("bool", True)
+	Traceback (most recent call last):
+	...
+        TypeError: bool must be an integer
+
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator("float", 4.6)
+        Traceback (most recent call last):
+        ...
+        TypeError: float must be an integer
+
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator("complex", 4j)
+        Traceback (most recent call last):
+        ...
+        TypeError: complex must be an integer
+
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator("string", "Pythonawesome")
+        Traceback (most recent call last):
+        ...
+        TypeError: string must be an integer
+
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator("list", [45, 52, 56])
+        Traceback (most recent call last):
+        ...
+        TypeError: list must be an integer
+
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator("tuple", (45, 665))
+        Traceback (most recent call last):
+        ...
+        TypeError: tuple must be an integer
+
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator("dict", {"edad": 19})
+        Traceback (most recent call last):
+        ...
+        TypeError: dict must be an integer
+
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator("Hello")
+        Traceback (most recent call last):
+        ...
+        TypeError: integer_validator() missing 1 required positional argument: 'value'
+
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator("Hello", 45, 56)
+        Traceback (most recent call last):
+        ...
+        TypeError: integer_validator() takes 3 positional arguments but 4 were given
+
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator()
+        Traceback (most recent call last):
+        ...
+        TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+	>>> bg = BaseGeometry()
+        >>> bg.area()
+        Traceback (most recent call last):
+        ...
+        Exception: area() is not implemented
+
+	>>> bg = BaseGeometry()
+        >>> bg.area(125)
+        Traceback (most recent call last):
+        ...
+        TypeError: area() takes 1 positional argument but 2 were given
