@@ -1,8 +1,12 @@
 #!/usr/bin/node
-// prints two arguments passed to it, in the following format: “ is ”
-//
-// if (isNaN(process.argv[2])) {
-//   console.log('Not a number');
-//   } else {
-//     console.log('My number: ' + parseInt(process.argv[2]));
-//     }
+
+const process = require('process');
+const args = process.argv;
+
+const newNumber = Number.parseInt(args[2]);
+
+if (Number.isNaN(newNumber)) {
+  console.log('Not a number');
+} else {
+  console.log(`My number: ${newNumber}`);
+}
