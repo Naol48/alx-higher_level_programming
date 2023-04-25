@@ -1,12 +1,17 @@
 #!/usr/bin/node
-const { get } = require('axios').default;
-const movieId = process.argv[2];
-const url = `https://swapi-api.hbtn.io/api/films/${movieId}`;
+// script that gets the contents of a webpage and stores it in a file.
 
-get(url)
-  .then(({ data: { characters } }) => {
-    const arrPromise = characters.map(element => get(element));
-    Promise.all(arrPromise)
-      .then((data) => data.forEach(({ data: { name } }) => console.log(name)));
-  })
-  .catch((err) => console.log(err));
+const url = process.argv[2];
+const file = process.argv[3];
+const req = require('request');
+const fileStream = require('fs');
+
+req(url, function (error, response, body) {
+  if (error) {
+    console.log(error);
+  } else {
+    fileStream.writeFile(file, body, 'utf-8', (error) => {
+      if (error) console.log(error);
+    });
+  }
+});

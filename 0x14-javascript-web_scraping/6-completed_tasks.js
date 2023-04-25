@@ -1,20 +1,17 @@
 #!/usr/bin/node
-const { get } = require('axios').default;
-const urlBase = process.argv[2];
+// script that gets the contents of a webpage and stores it in a file.
 
-get(urlBase)
-  // data es un array de objetos
-  .then(({ data }) => {
-    const finalObj = {};
-    data.forEach(({ userId, completed }) => {
-      if (completed) {
-        if (finalObj[userId] === undefined) {
-          finalObj[userId] = 1;
-        } else {
-          finalObj[userId] += 1;
-        }
-      }
+const url = process.argv[2];
+const file = process.argv[3];
+const req = require('request');
+const fileStream = require('fs');
+
+req(url, function (error, response, body) {
+  if (error) {
+    console.log(error);
+  } else {
+    fileStream.writeFile(file, body, 'utf-8', (error) => {
+      if (error) console.log(error);
     });
-    console.log(finalObj);
-  })
-  .catch((err) => console.log(err));
+  }
+});

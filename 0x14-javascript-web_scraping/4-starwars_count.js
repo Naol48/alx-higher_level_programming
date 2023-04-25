@@ -1,18 +1,19 @@
 #!/usr/bin/node
-const { get } = require('axios').default;
-const url = process.argv[2];
+// script that prints the number of movies where the character “Wedge Antilles” is present.
 
-get(url)
-  .then(({ data }) => data)
-  .then(({ results }) => {
-    let count = 0;
-    for (const film of results) {
-      film.characters.forEach(urls => {
-        if (urls.includes('18')) {
-          count += 1;
-        }
-      });
+const url = process.argv[2];
+const req = require('request');
+
+req(url, function (error, response, body) {
+  if (error) {
+    console.log(error);
+  } else {
+    let counter = 0;
+    for (const film of JSON.parse(body).results) {
+      for (const character of film.characters) {
+        if (character.includes('18')) counter++;
+      }
     }
-    console.log(count);
-  })
-  .catch((err) => console.log(err));
+    console.log(counter);
+  }
+});
